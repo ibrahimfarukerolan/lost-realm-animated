@@ -1,56 +1,142 @@
-# Welcome to your Expo app 👋
+# The Lost Realm — Animated Fantasy Game Start Screen
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Overview
 
-## Get started
+The Lost Realm is a fantasy-themed mobile game start screen developed using React Native, Expo, and TypeScript.
 
-1. Install dependencies
+The application features a medieval-style interface with animated burning torches, a flying dragon, custom typography, and an interactive Start Game button.
 
-   ```bash
-   npm install
-   ```
+This project was developed for the **Development of Hybrid Mobile Applications — Laboratory 6** assignment.
 
-2. Start the app
+## Features
 
-   ```bash
-   npx expo start
-   ```
+- **Dynamic Game Information:** Loads the game title and version from a bundled text file.
+- **Medieval Background:** Displays a scalable raster background using `ImageBackground`.
+- **Custom Font:** Uses Cinzel Decorative through the `useFonts` hook.
+- **Animated Torches:** Displays two continuously burning torches using Lottie JSON animations.
+- **Flying Dragon:** Animates a fantasy dragon from left to right every five seconds using React Native's `Animated` API.
+- **Random Trajectory:** Changes the dragon's vertical flight path for each animation cycle.
+- **Error Handling:** Validates the game information and provides fallback values when the bundled content is invalid or cannot be read at runtime.
+- **Orientation Lock:** Requests portrait orientation using `expo-screen-orientation`.
+- **Interactive Button:** Uses `Pressable` to provide visual feedback when Start Game is pressed.
 
-In the output, you'll find options to open the app in a
+## Technologies Used
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- React Native
+- Expo
+- TypeScript
+- Expo Router
+- Expo Font
+- Expo Asset
+- Expo File System
+- Expo Screen Orientation
+- Lottie React Native
+- React Native Animated API
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+lost-realm-animated/
+├── assets/
+│   ├── animations/
+│   │   └── torch.json
+│   ├── backgrounds/
+│   │   └── medieval_wood.jpg
+│   ├── data/
+│   │   ├── game-info.txt
+│   │   └── default-game-info.txt
+│   ├── fonts/
+│   └── images/
+│       └── dragon.png
+├── src/
+│   ├── app/
+│   │   ├── _layout.tsx
+│   │   └── index.tsx
+│   └── utils/
+│       └── gameInfo.ts
+├── app.json
+├── metro.config.js
+├── package.json
+└── README.md
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Installation and Setup
 
-### Other setup steps
+### 1. Clone the repository
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+git clone https://github.com/ibrahimfarukerolan/lost-realm-animated.git
+cd lost-realm-animated
+```
 
-## Learn more
+### 2. Install dependencies
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm install
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 3. Start the application
 
-## Join the community
+```bash
+npx expo start
+```
 
-Join our community of developers creating universal apps.
+Open the application using Expo Go on a compatible mobile device or run it in a supported emulator.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Game Information Format
+
+The `assets/data/game-info.txt` file contains the game title on the first line and its version on the second line.
+
+Example:
+
+```text
+The Lost Realm
+1.0.0
+```
+
+The application validates the title and version before displaying them.
+
+If the file contains invalid information or cannot be read at runtime, the application uses fallback values.
+
+**Note:** The text file is referenced through a static Metro asset import. Physically removing it from the source project before bundling causes a build error; this scenario is not covered by the runtime fallback.
+
+## Dragon Animation
+
+The dragon animation uses React Native's built-in `Animated` API.
+
+Each flight:
+
+1. Begins outside the left edge of the screen.
+2. Moves horizontally toward the right edge.
+3. Uses randomized vertical start and end positions.
+4. Takes approximately three seconds.
+5. Repeats every five seconds.
+
+## Lottie Torch Animations
+
+Two Lottie components display animated burning torches on opposite sides of the screen.
+
+Both components use the same `torch.json` animation with `autoPlay` and `loop` enabled.
+
+## Testing
+
+The following functionality was tested:
+
+- Game information loading
+- Invalid text-file fallback
+- Medieval font rendering
+- Background image scaling
+- Lottie torch animations
+- Flying dragon animation
+- Randomized flight paths
+- Portrait orientation
+- Start Game button interaction
+- TypeScript validation using `npx tsc --noEmit`
+
+## Author
+
+Ibrahim Faruk Erolan
+
+## Course
+
+Development of Hybrid Mobile Applications — Laboratory 6
